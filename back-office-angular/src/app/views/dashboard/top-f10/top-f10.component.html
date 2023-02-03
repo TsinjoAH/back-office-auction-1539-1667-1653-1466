@@ -1,0 +1,43 @@
+
+<c-row *ngIf="data">
+  <c-col xs>
+    <c-card class="mb-4">
+      <c-card-header>{{title}}</c-card-header>
+      <c-card-body>
+        <table
+          [hover]="true"
+          [responsive]="true"
+          [striped]="true"
+          align="middle"
+          cTable
+          class="mb-0 border"
+        >
+          <thead cTableColor="light">
+          <tr>
+            <th *ngFor="let header of data.headers" >{{header}}</th>
+            <th *ngIf="ratePresent" >Taux</th>
+          </tr>
+          </thead>
+          <tbody>
+          <tr *ngFor="let elt of data.data; index as i">
+            <td *ngFor="let key of data.columns" >{{key(elt)}}</td>
+            <td *ngIf="ratePresent">
+              <div class="d-flex">
+                <div class="float-start">
+                  <strong>{{ data.getRate(elt) }}%</strong>
+                </div>
+              </div>
+              <c-progress thin>
+                <c-progress-bar
+                  [value]="data.getRate(elt)"
+                  color="{{ getColor(data.getRate(elt)) }}"
+                ></c-progress-bar>
+              </c-progress>
+            </td>
+          </tr>
+          </tbody>
+        </table>
+      </c-card-body>
+    </c-card>
+  </c-col>
+</c-row>

@@ -1,0 +1,23 @@
+<c-row class="d-flex justify-content-start">
+    <app-increase-rated [data]="totalData"></app-increase-rated>
+</c-row>
+
+<app-stat-date
+  title="Nombre des encheres selon un intervalle"
+  [statInfo]="auctionStatInfo"
+  (dateParams)="loadAuctionCountData($event)"
+></app-stat-date>
+
+<app-stat-date
+  title="Commission selon un intervalle"
+  [statInfo]="commissionStatInfo"
+  (dateParams)="loadCommissionDayData($event)"
+></app-stat-date>
+
+<ng-container *ngFor="let table of top10()" >
+  <app-top-f10
+    title="{{table.title}}"
+    [data]="table.data"
+    [ratePresent]="table.ratePresent"
+  ></app-top-f10>
+</ng-container>
